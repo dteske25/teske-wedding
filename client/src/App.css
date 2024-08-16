@@ -40,3 +40,30 @@
 .read-the-docs {
   color: #888;
 }
+
+.big-button {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 10em;
+  justify-content: center;
+  gap: 1em;
+  background-color: #141414;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.big-button:hover {
+  background-color: #383838;
+}
+
+.big-button-divider {
+  width: 5em;
+  border: none;
+  border-top: 2px solid #4d4d4d;
+}
+
+.icon {
+  height: 36px;
+  width: 36px;
+}
