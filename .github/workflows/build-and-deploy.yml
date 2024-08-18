@@ -1,0 +1,61 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  server:
+    defaults:
+      run:
+        working-directory: "server"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js 22.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22.x
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run build
+  client:
+    defaults:
+      run:
+        working-directory: "client"
+    # permissions:
+    #   contents: 'read'
+    #   id-token: 'write'
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js 22.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22.x
+        cache: 'npm'
+    - run: npm ci
+
+
+    # - id: 'auth'
+    #   uses: 'google-github-actions/auth@v2'
+    #   with
+    #     workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+    #     service_account: 'my-service-account@my-project.iam.gserviceaccount.com'
+
+    # - id: 'upload-folder'
+    #   uses: 'google-github-actions/upload-cloud-storage@v2'
+    #   with:
+    #     path: '/path/to/folder'
+    #     destination: 'teske-wedding-static-content'
+    
+ 
+
+          
