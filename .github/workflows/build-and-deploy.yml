@@ -12,9 +12,6 @@ on:
 jobs:
   server:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: "./server"
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js 22.x
@@ -22,12 +19,11 @@ jobs:
         with:
           node-version: 22.x
           cache: "npm"
-      - run: npm ci
+      - name: "Install"
+        run: npm ci
+        working-directory: ./server
   client:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: "./client"
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js 22.x
@@ -35,5 +31,9 @@ jobs:
         with:
           node-version: 22.x
           cache: "npm"
-      - run: npm ci
-      - run: npm run build
+      - name: "Install"
+        run: npm ci
+        working-directory: ./client
+      - name: "Build"
+        run: npm run build
+        working-directory: ./client
